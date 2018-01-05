@@ -17,4 +17,4 @@ Scripts for calculating Limits
 
 To get the significance run the command:
 
-	combine -d limits_vvjj_wv_13TeV2016 -M ProfileLikelihood --significance -t -1 --expectSignal=1
+	combine -d limits_vvjj_wv_13TeV2016.txt -M ProfileLikelihood --significance -t -1 --expectSignal=1
