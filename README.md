@@ -33,7 +33,7 @@ mv LimitSettingTool/resubmit.sh	$CMSSW_BASE/CombinedEWKAnalysis/CommonTools/data
 root -l -b -q fit.C
 ```
 
-To run the `fit.C` check if the input root file name is appropriate.
+To run the `fit.C` check if the input root file name is appropriate. We are fitting signal here because fitting is dependent on the CMSSW version. And our signal extraction part is in CMSSW_8X while this limit tool we are running on CMSSW_7_1_5.
 
 
 ```sh
@@ -54,3 +54,4 @@ python build1DInterval.py -5.0 5.0 higgsCombineTest.MultiDimFit.mH120.root hfs0
 	1. File name convention for aQGC signal: `signal_proc_*channel_name*.root`
 	2. For another file naming convention should be just `channel_name.root`.
 3. Note the **channel_name** from naming convention of the root file. It should be same in the two input root files.
+4. Selected range for the parameters under calculation should not be too large.
