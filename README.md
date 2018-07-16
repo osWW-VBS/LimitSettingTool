@@ -69,6 +69,22 @@ bash resubmit.sh
 python runLimitTool.py
 ```
 
+# Some useful command to filter out condor log files
+
+	```sh
+	find . | xargs grep -l "Traceback (most recent call last)" | awk '{print "rm "$1}' > remove.sh
+	
+	sed -i '/rasharma/d' *.stdout
+	
+	sed -i '/inversion of matrix fails/d' *.stdout
+
+	sed -i '/Minimization did NOT converge/d' *.stdout
+	```
+or,
+	```sh
+	sed -E -i '/rasharma|inversion of matrix fails|Minimization did NOT converge/d' *.stdout
+
+	grep "95% CL Limit" *.stdout | grep "U" | awk -F ":" '{print "mv "$1" union/"}' > MoveFileToUniDir.sh
 # List of important points
 
 1. There are two input root files.
