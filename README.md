@@ -85,6 +85,8 @@ or,
 	sed -E -i '/rasharma|inversion of matrix fails|Minimization did NOT converge/d' *.stdout
 
 	grep "95% CL Limit" *.stdout | grep "U" | awk -F ":" '{print "mv "$1" union/"}' > MoveFileToUniDir.sh
+	```
+
 # List of important points
 
 1. There are two input root files.
@@ -95,3 +97,22 @@ or,
 	2. For another file naming convention should be just `channel_name.root`.
 3. Note the **channel_name** from naming convention of the root file. It should be same in the two input root files.
 4. Selected range for the parameters under calculation should not be too large.
+
+# List of important commands
+
+```bash
+find . | xargs grep -l "Traceback (most recent call last)" | awk '{print "rm "$1}' > remove.sh
+
+sed -i '/rasharma/d' *.stdout
+
+sed -i '/ list index out of range/d' *.stdout
+
+sed -i '/inversion of matrix fails/d' *.stdout
+```
+
+
+# print number from 4.80 to 12.0 in steps of 0.025
+
+```bash
+awk 'BEGIN { for (i=4.80; i<12.0; i+=0.025) print i}' | xargs | sed -e 's/ /, /g'
+```

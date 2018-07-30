@@ -10,7 +10,9 @@ import os
 #aQGCpars = {'fm0':[-12.5,12.5], 'ft1':[-8.3,8.3], 'fm1':[-19,19]}
 #aQGCpars = {'ft1':[-7.3,7.3], 'fm0':[-11.5,11.5], 'fm1':[-21,21]}
 #aQGCpars = {'ft1':[-9.0,9.0], 'fm0':[-12.0,12.0], 'fm1':[-25,25]}
-aQGCpars = {'ft1':[-11.0,11.0]}
+#aQGCpars = {'fm0':[-1.1,1.1]}
+aQGCpars = {'fs1':[-5.50,5.50]}
+mass = ""
 #aQGCpars = {'fs0':[-4.0,3.9]}
 #aQGCpars = {'fs0':[-4.5,4.5], 'ft0':[-0.2,0.2], 'ft1':[-0.3,0.3], 'ft2':[-0.5,0.5], 'fm0':[-1.5,1.5], 'fm1':[-4,4], 'fm6':[-3,3], 'fm7':[-5.5,5.5]}
 #for mT
@@ -18,7 +20,8 @@ aQGCpars = {'ft1':[-11.0,11.0]}
 #aQGCpars = {'fs0':[-5,5], 'ft0':[-3.7,3.7], 'ft1':[-3.7,3.7], 'ft2':[-3.7,3.7], 'fm0':[-3.5,3.5], 'fm1':[-4,4], 'fm6':[-3,3], 'fm7':[-3.5,3.5]}
 
 dataPath = "$CMSSW_BASE/src/CombinedEWKAnalysis/CommonTools/data/anomalousCoupling/"
-configFile = "config_TF1_wv_plain_my"
+#configFile = "config_TF1_wv_plain_my"
+configFile = ["config_TF1_wv_plain_my","config_TF1_wv_plain_my_ZV"]
 os.system("date")
 
 LimitFile = "Limits_mass_5000.log"
@@ -27,6 +30,9 @@ os.system("rm Limits.log")
 
 for pars, value in aQGCpars.iteritems():
 	print "\n\n","="*20,"\n\n"
-	print('python submit_condor.py -r '+str(value[0])+' '+ str(value[1]) + '  -l ' + LimitFile + ' -a ' + pars + '  -p ' + dataPath + '  -c ' + configFile)
-	os.system('python submit_condor.py -r '+str(value[0])+' '+ str(value[1]) + '  -l ' + LimitFile + ' -a ' + pars + '  -p ' + dataPath + '  -c ' + configFile)
+	#print('python submit_condor.py -r '+str(value[0])+' '+ str(value[1]) + '  -l ' + LimitFile + ' -a ' + pars + '  -p ' + dataPath + '  -c ' + configFile)
+	if mass == "":
+		os.system('python submit_condor.py -r '+str(value[0])+' '+ str(value[1]) + '  -l ' + LimitFile + ' -a ' + pars + '  -p ' + dataPath + '  -c ' + configFile[0] + ' ' + configFile[1])
+	else:
+		os.system('python submit_condor.py -r '+str(value[0])+' '+ str(value[1]) + '  -l ' + LimitFile + ' -a ' + pars + '  -p ' + dataPath + '  -c ' + configFile[0] + ' ' + configFile[1] + '  -m ' + mass)
 os.system("date")
