@@ -1,4 +1,4 @@
-void fit()
+void fit(TString CutOff="")
 {
   double fs0[91] = {-900.0, -880.0, -860.0, -840.0, -820.0, -800.0, -780.0, -760.0, -740.0, -720.0, -700.0, -680.0, -660.0, -640.0, -620.0, -600.0, -580.0, -560.0, -540.0, -520.0, -500.0, -480.0, -460.0, -440.0, -420.0, -400.0, -380.0, -360.0, -340.0, -320.0, -300.0, -280.0, -260.0, -240.0, -220.0, -200.0, -180.0, -160.0, -140.0, -120.0, -100.0, -80.0, -60.0, -40.0, -20.0, 0.0, 20.0, 40.0, 60.0, 80.0, 100.0, 120.0, 140.0, 160.0, 180.0, 200.0, 220.0, 240.0, 260.0, 280.0, 300.0, 320.0, 340.0, 360.0, 380.0, 400.0, 420.0, 440.0, 460.0, 480.0, 500.0, 520.0, 540.0, 560.0, 580.0, 600.0, 620.0, 640.0, 660.0, 680.0, 700.0, 720.0, 740.0, 760.0, 780.0, 800.0, 820.0, 840.0, 860.0, 880.0, 900.0};
 double fs1[67] = {-330.0, -320.0, -310.0, -300.0, -290.0, -280.0, -270.0, -260.0, -250.0, -240.0, -230.0, -220.0, -210.0, -200.0, -190.0, -180.0, -170.0, -160.0, -150.0, -140.0, -130.0, -120.0, -110.0, -100.0, -90.0, -80.0, -70.0, -60.0, -50.0, -40.0, -30.0, -20.0, -10.0, 0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.0, 110.0, 120.0, 130.0, 140.0, 150.0, 160.0, 170.0, 180.0, 190.0, 200.0, 210.0, 220.0, 230.0, 240.0, 250.0, 260.0, 270.0, 280.0, 290.0, 300.0, 310.0, 320.0, 330.0};
@@ -9,12 +9,12 @@ double fm7[121] = {-300.0, -295.0, -290.0, -285.0, -280.0, -275.0, -270.0, -265.
 double ft0[69] = {-6.8, -6.6, -6.4, -6.2, -6.0, -5.8, -5.6, -5.4, -5.2, -5.0, -4.8, -4.6, -4.4, -4.2, -4.0, -3.8, -3.6, -3.4, -3.2, -3.0, -2.8, -2.6, -2.4, -2.2, -2.0, -1.8, -1.6, -1.4, -1.2, -1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4, 2.6, 2.8, 3.0, 3.2, 3.4, 3.6, 3.8, 4.0, 4.2, 4.4, 4.6, 4.8, 5.0, 5.2, 5.4, 5.6, 5.8, 6.0, 6.2, 6.4, 6.6, 6.8};
 double ft1[51] = {-12.5, -12.0, -11.5, -11.0, -10.5, -10.0, -9.5, -9.0, -8.5, -8.0, -7.5, -7.0, -6.5, -6.0, -5.5, -5.0, -4.5, -4.0, -3.5, -3.0, -2.5, -2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0, 9.5, 10.0, 10.5, 11.0, 11.5, 12.0, 12.5};
 double ft2[83] = {-20.5, -20.0, -19.5, -19.0, -18.5, -18.0, -17.5, -17.0, -16.5, -16.0, -15.5, -15.0, -14.5, -14.0, -13.5, -13.0, -12.5, -12.0, -11.5, -11.0, -10.5, -10.0, -9.5, -9.0, -8.5, -8.0, -7.5, -7.0, -6.5, -6.0, -5.5, -5.0, -4.5, -4.0, -3.5, -3.0, -2.5, -2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0, 9.5, 10.0, 10.5, 11.0, 11.5, 12.0, 12.5, 13.0, 13.5, 14.0, 14.5, 15.0, 15.5, 16.0, 16.5, 17.0, 17.5, 18.0, 18.5, 19.0, 19.5, 20.0, 20.5};
-  TFile *f = new TFile("ch1_splitted_TF1_hfm0.root");
+  TFile *f = new TFile("ch1_splitted_TF1_hfm0"+CutOff+".root");
   TH1 *dd1 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_1");
   TH1 *dd2 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_2");
   TH1 *dd3 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_3");
   TH1 *dd4 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_4");
-  TFile *outFile = new TFile("signal_proc_ch1_splitted_TF1_hfm0.root","RECREATE"); 
+  TFile *outFile = new TFile("signal_proc_ch1_splitted_TF1_hfm0"+CutOff+".root","RECREATE"); 
   outFile->cd();
   TF1 *fit_1 = new TF1("bin_content_par1_1","pol2",fm0[0]-0.5,fm0[84]-0.5);
   TF1 *fit_2 = new TF1("bin_content_par1_2","pol2",fm0[0]-0.5,fm0[84]-0.5);
@@ -32,12 +32,12 @@ double ft2[83] = {-20.5, -20.0, -19.5, -19.0, -18.5, -18.0, -17.5, -17.0, -16.5,
   outFile->Delete();
 
 
-  TFile *f = new TFile("ch1_splitted_TF1_hfm1.root");
+  TFile *f = new TFile("ch1_splitted_TF1_hfm1"+CutOff+".root");
   TH1 *dd1 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_1");
   TH1 *dd2 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_2");
   TH1 *dd3 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_3");
   TH1 *dd4 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_4");
-  TFile *outFile = new TFile("signal_proc_ch1_splitted_TF1_hfm1.root","RECREATE"); 
+  TFile *outFile = new TFile("signal_proc_ch1_splitted_TF1_hfm1"+CutOff+".root","RECREATE"); 
   outFile->cd();
   TF1 *fit_1 = new TF1("bin_content_par1_1","pol2",fm1[0]-2.5,fm1[66]-2.5);
   TF1 *fit_2 = new TF1("bin_content_par1_2","pol2",fm1[0]-2.5,fm1[66]-2.5);
@@ -54,12 +54,12 @@ double ft2[83] = {-20.5, -20.0, -19.5, -19.0, -18.5, -18.0, -17.5, -17.0, -16.5,
   f->Delete();
   outFile->Delete();
 
-  TFile *f = new TFile("ch1_splitted_TF1_hfm6.root");
+  TFile *f = new TFile("ch1_splitted_TF1_hfm6"+CutOff+".root");
   TH1 *dd1 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_1");
   TH1 *dd2 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_2");
   TH1 *dd3 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_3");
   TH1 *dd4 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_4");
-  TFile *outFile = new TFile("signal_proc_ch1_splitted_TF1_hfm6.root","RECREATE"); 
+  TFile *outFile = new TFile("signal_proc_ch1_splitted_TF1_hfm6"+CutOff+".root","RECREATE"); 
   outFile->cd();
   TF1 *fit_1 = new TF1("bin_content_par1_1","pol2",fm6[0]-1.0,fm6[83]-1.0);
   TF1 *fit_2 = new TF1("bin_content_par1_2","pol2",fm6[0]-1.0,fm6[83]-1.0);
@@ -76,12 +76,12 @@ double ft2[83] = {-20.5, -20.0, -19.5, -19.0, -18.5, -18.0, -17.5, -17.0, -16.5,
   f->Delete();
   outFile->Delete();
 
-  TFile *f = new TFile("ch1_splitted_TF1_hfm7.root");
+  TFile *f = new TFile("ch1_splitted_TF1_hfm7"+CutOff+".root");
   TH1 *dd1 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_1");
   TH1 *dd2 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_2");
   TH1 *dd3 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_3");
   TH1 *dd4 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_4");
-  TFile *outFile = new TFile("signal_proc_ch1_splitted_TF1_hfm7.root","RECREATE"); 
+  TFile *outFile = new TFile("signal_proc_ch1_splitted_TF1_hfm7"+CutOff+".root","RECREATE"); 
   outFile->cd();
   TF1 *fit_1 = new TF1("bin_content_par1_1","pol2",fm7[0]-2.5,fm7[120]-2.5);
   TF1 *fit_2 = new TF1("bin_content_par1_2","pol2",fm7[0]-2.5,fm7[120]-2.5);
@@ -98,12 +98,12 @@ double ft2[83] = {-20.5, -20.0, -19.5, -19.0, -18.5, -18.0, -17.5, -17.0, -16.5,
   f->Delete();
   outFile->Delete();
 
-  TFile *f = new TFile("ch1_splitted_TF1_hft0.root");
+  TFile *f = new TFile("ch1_splitted_TF1_hft0"+CutOff+".root");
   TH1 *dd1 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_1");
   TH1 *dd2 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_2");
   TH1 *dd3 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_3");
   TH1 *dd4 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_4");
-  TFile *outFile = new TFile("signal_proc_ch1_splitted_TF1_hft0.root","RECREATE"); 
+  TFile *outFile = new TFile("signal_proc_ch1_splitted_TF1_hft0"+CutOff+".root","RECREATE"); 
   outFile->cd();
   TF1 *fit_1 = new TF1("bin_content_par1_1","pol2",ft0[0]-0.1,ft0[68]-0.1);
   TF1 *fit_2 = new TF1("bin_content_par1_2","pol2",ft0[0]-0.1,ft0[68]-0.1);
@@ -120,12 +120,12 @@ double ft2[83] = {-20.5, -20.0, -19.5, -19.0, -18.5, -18.0, -17.5, -17.0, -16.5,
   f->Delete();
   outFile->Delete();
 
-  TFile *f = new TFile("ch1_splitted_TF1_hft1.root");
+  TFile *f = new TFile("ch1_splitted_TF1_hft1"+CutOff+".root");
   TH1 *dd1 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_1");
   TH1 *dd2 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_2");
   TH1 *dd3 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_3");
   TH1 *dd4 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_4");
-  TFile *outFile = new TFile("signal_proc_ch1_splitted_TF1_hft1.root","RECREATE"); 
+  TFile *outFile = new TFile("signal_proc_ch1_splitted_TF1_hft1"+CutOff+".root","RECREATE"); 
   outFile->cd();
   TF1 *fit_1 = new TF1("bin_content_par1_1","pol2",ft1[0]-0.25,ft1[50]-0.25);
   TF1 *fit_2 = new TF1("bin_content_par1_2","pol2",ft1[0]-0.25,ft1[50]-0.25);
@@ -142,12 +142,12 @@ double ft2[83] = {-20.5, -20.0, -19.5, -19.0, -18.5, -18.0, -17.5, -17.0, -16.5,
   f->Delete();
   outFile->Delete();
 
-  TFile *f = new TFile("ch1_splitted_TF1_hft2.root");
+  TFile *f = new TFile("ch1_splitted_TF1_hft2"+CutOff+".root");
   TH1 *dd1 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_1");
   TH1 *dd2 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_2");
   TH1 *dd3 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_3");
   TH1 *dd4 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_4");
-  TFile *outFile = new TFile("signal_proc_ch1_splitted_TF1_hft2.root","RECREATE"); 
+  TFile *outFile = new TFile("signal_proc_ch1_splitted_TF1_hft2"+CutOff+".root","RECREATE"); 
   outFile->cd();
   TF1 *fit_1 = new TF1("bin_content_par1_1","pol2",ft2[0]-0.25,ft2[82]-0.25);
   TF1 *fit_2 = new TF1("bin_content_par1_2","pol2",ft2[0]-0.25,ft2[82]-0.25);
@@ -164,12 +164,12 @@ double ft2[83] = {-20.5, -20.0, -19.5, -19.0, -18.5, -18.0, -17.5, -17.0, -16.5,
   f->Delete();
   outFile->Delete();
 
-  TFile *f = new TFile("ch1_splitted_TF1_hfs0.root");
+  TFile *f = new TFile("ch1_splitted_TF1_hfs0"+CutOff+".root");
   TH1 *dd1 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_1");
   TH1 *dd2 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_2");
   TH1 *dd3 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_3");
   TH1 *dd4 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_4");
-  TFile *outFile = new TFile("signal_proc_ch1_splitted_TF1_hfs0.root","RECREATE"); 
+  TFile *outFile = new TFile("signal_proc_ch1_splitted_TF1_hfs0"+CutOff+".root","RECREATE"); 
   outFile->cd();
   TF1 *fit_1 = new TF1("bin_content_par1_1","pol2",fs0[0]-10,fs0[90]-10);
   TF1 *fit_2 = new TF1("bin_content_par1_2","pol2",fs0[0]-10,fs0[90]-10);
@@ -186,25 +186,25 @@ double ft2[83] = {-20.5, -20.0, -19.5, -19.0, -18.5, -18.0, -17.5, -17.0, -16.5,
   f->Delete();
   outFile->Delete();
 
-  //TFile *f = new TFile("ch1_splitted_TF1_hfs1.root");
-  //TH1 *dd1 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_1");
-  //TH1 *dd2 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_2");
-  //TH1 *dd3 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_3");
-  //TH1 *dd4 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_4");
-  //TFile *outFile = new TFile("signal_proc_ch1_splitted_TF1_hfs1.root","RECREATE"); 
-  //outFile->cd();
-  //TF1 *fit_1 = new TF1("bin_content_par1_1","pol2",fs1[0]-5,fs1[66]-5);
-  //TF1 *fit_2 = new TF1("bin_content_par1_2","pol2",fs1[0]-5,fs1[66]-5);
-  //TF1 *fit_3= new TF1("bin_content_par1_3","pol2",fs1[0]-5,fs1[66]-5);
-  //TF1 *fit_4 = new TF1("bin_content_par1_4","pol2",fs1[0]-5,fs1[66]-5);
-  //dd1->Fit("bin_content_par1_1","R");
-  //fit_1->Write();
-  //dd2->Fit("bin_content_par1_2","R");
-  //fit_2->Write();
-  //dd3->Fit("bin_content_par1_3","R");
-  //fit_3->Write();
-  //dd4->Fit("bin_content_par1_4","R");
-  //fit_4->Write();
-  //f->Delete();
-  //outFile->Delete();
+  TFile *f = new TFile("ch1_splitted_TF1_hfs1"+CutOff+".root");
+  TH1 *dd1 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_1");
+  TH1 *dd2 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_2");
+  TH1 *dd3 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_3");
+  TH1 *dd4 = (TH1*) gDirectory->FindObjectAny("bin_content_par1_4");
+  TFile *outFile = new TFile("signal_proc_ch1_splitted_TF1_hfs1"+CutOff+".root","RECREATE"); 
+  outFile->cd();
+  TF1 *fit_1 = new TF1("bin_content_par1_1","pol2",fs1[0]-5,fs1[66]-5);
+  TF1 *fit_2 = new TF1("bin_content_par1_2","pol2",fs1[0]-5,fs1[66]-5);
+  TF1 *fit_3= new TF1("bin_content_par1_3","pol2",fs1[0]-5,fs1[66]-5);
+  TF1 *fit_4 = new TF1("bin_content_par1_4","pol2",fs1[0]-5,fs1[66]-5);
+  dd1->Fit("bin_content_par1_1","R");
+  fit_1->Write();
+  dd2->Fit("bin_content_par1_2","R");
+  fit_2->Write();
+  dd3->Fit("bin_content_par1_3","R");
+  fit_3->Write();
+  dd4->Fit("bin_content_par1_4","R");
+  fit_4->Write();
+  f->Delete();
+  outFile->Delete();
 }
